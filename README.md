@@ -1,2 +1,3 @@
-# nyc-energy-dash
-Deploying a dashboard to present monthly energy data form the US Energy Information Administration (EIA)
+# NYC Data Playground
+
+A set of Python script to download NYC-related data through APIs.
