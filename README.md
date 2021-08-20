@@ -1,3 +1,3 @@
 # NYC Data Playground
 
-A set of Python script to download NYC-related data through APIs.
+A set of Python script(s) to download NYC-related data through APIs.
