@@ -17,9 +17,17 @@ SELECT geo_place_name geo_location, name measure, data_value latest_data_value,
 	CASE WHEN  data_value >=
 		(SELECT AVG(data_value)
 		FROM air_quality
-		WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name='Fine Particulate Matter (PM2.5)'
+		WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name = 'Fine Particulate Matter (PM2.5)'
 		GROUP BY start_date)
 	THEN 'ABOVE' ELSE 'BELOW' END flag
 FROM air_quality
-WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name='Fine Particulate Matter (PM2.5)'
+WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name = 'Fine Particulate Matter (PM2.5)'
+ORDER BY data_value DESC;
+
+/* Same as above but using window function */
+SELECT geo_place_name geo_location, name measure, data_value latest_data_value, 
+	CASE WHEN  data_value >= AVG(data_value) OVER()
+	THEN 'ABOVE' ELSE 'BELOW' END flag
+FROM air_quality
+WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name = 'Fine Particulate Matter (PM2.5)'
 ORDER BY data_value DESC;
