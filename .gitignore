@@ -135,3 +135,6 @@ Scripts/
 
 # Credentials
 *.env
+
+# Ignore downloaded files
+*.csv
