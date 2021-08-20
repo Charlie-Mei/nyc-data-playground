@@ -34,7 +34,7 @@ for series in series_ids:
     print(data_tables[series].head())
 
 # saev the outputs to the data folder
-os.chdir(r'C:\github\nyc-energy-dash\data')
+os.chdir(r'C:\github\nyc-data-playground\data')
 for series in data_tables:
     data_tables[series].to_csv(series+".csv", index=False)
     
