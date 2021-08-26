@@ -31,3 +31,12 @@ SELECT geo_place_name geo_location, name measure, data_value latest_data_value,
 FROM air_quality
 WHERE start_date = (SELECT MAX(start_date) FROM air_quality) AND name = 'Fine Particulate Matter (PM2.5)'
 ORDER BY data_value DESC;
+
+/* Rank the PM2.5 for each date and and metric */
+SELECT a.geo_place_name as location, a.start_date, a.name, a.data_value, a.rank_val
+FROM
+(SELECT *, RANK() OVER(PARTITION BY start_date, name
+					 ORDER BY data_value DESC) rank_val
+ FROM air_quality) a
+where a.rank_val <= 5;
+
